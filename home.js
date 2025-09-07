@@ -134,8 +134,8 @@ document
       alert("Please Enter Your Valid Pin Number");
       return;
     }
-    if(amount <=0){
-        alert("Invalid Amount!");
+    if(amount <=0 || amount>100000){
+        alert("Invalid Amount!\nYou can add $0 to $100000");
         return;
     }
     // add amount
@@ -246,7 +246,7 @@ document
     const availableBalance = getInnerTextNumber("available-balance");
     
     if (coupon !== couponCode) {
-        alert("Please Enter Valid Coupon Code");
+        alert("Please Enter Valid Coupon Code\nuse 3456 to get $500 bonus");
         return;
     } else {
         const totalNewAvailableBalance = availableBalance + 500;
