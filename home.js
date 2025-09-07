@@ -309,7 +309,7 @@ document.getElementById("transaction-btn").addEventListener("click",function(){
         const div = document.createElement("div");
         div.innerHTML = `
         <div
-            class="bg-white rounded-2xl p-3 mt-3 flex justify-between items-center"
+            class="bg-white rounded-2xl p-3 mt-3 flex justify-between items-center max-w-lg"
           >
             <div class="flex">
               <div class="p-4 rounded-full bg-[#f4f5f7]">
