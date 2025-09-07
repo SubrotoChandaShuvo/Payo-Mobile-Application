@@ -1,25 +1,39 @@
 const validPin = 1234;
 
+// functions to get input values
+function getInputValueNumber(Id) {
+  return parseInt(document.getElementById(Id).value);
+}
+function getInputValue(Id) {
+  return document.getElementById(Id).value;
+}
+// function to get Inner text
+function getInnerTextNumber(id){
+    return parseInt(document.getElementById(id).innerText);
+}
+// function to set inner text
+function setInnerText(id, value){
+    document.getElementById(id).innerText = value;
+}
+
 // Add money works
 document
   .getElementById("add-money-btn")
   .addEventListener("click", function (e) {
     e.preventDefault();
     console.log("add money btn clicked");
-    const bank = document.getElementById("bank").value;
-    const accountNumber = document.getElementById("account-number").value;
-    const amount = parseInt(document.getElementById("add-amount").value);
-    const pin = parseInt(document.getElementById("add-pin").value);
+    const bank = getInputValue("bank");
+    const accountNumber = getInputValue("account-number");
+    const amount = getInputValueNumber("add-amount");
+    const pin = getInputValueNumber("add-pin");
     // console.log(bank, accountNumber, amount, pin)
 
     // get the Available balance Do you have
-    const availableBalance = parseInt(
-      document.getElementById("available-balance").innerText
-    );
+    const availableBalance = getInnerTextNumber("available-balance");
     // console.log(availableBalance)
 
     // condition check
-    if (accountNumber.length < 11) {
+    if (accountNumber.length !== 11) {
       alert("Please Provide Your Valid Account Number");
       return;
     }
@@ -30,8 +44,11 @@ document
 
     // add amount
     const totalNewAvailableBalance = amount + availableBalance;
-    document.getElementById("available-balance").innerText =
-      totalNewAvailableBalance;
+    setInnerText("available-balance",totalNewAvailableBalance);
+    alert("Add Money Successful.");
+
+    // reset form
+    document.getElementById("addMoneyForm").reset();
   });
 
 // document.getElementById("cashOut-btn").addEventListener('click', function(){
@@ -53,30 +70,27 @@ document
   .getElementById("withdraw-money-btn")
   .addEventListener("click", function (e) {
     e.preventDefault();
-    const agentNumber = document.getElementById("agent-number").value;
-    const cashOutAmount = parseInt(
-      document.getElementById("cashOut-amount").value
-    );
-    const cashOutPin = parseInt(document.getElementById("cashOut-pin").value);
+    const agentNumber = getInputValue("agent-number");
+    const cashOutAmount = getInputValueNumber("cashOut-amount");
+    const cashOutPin = getInputValueNumber("cashOut-pin");
 
-    const availableBalance = parseInt(
-      document.getElementById("available-balance").innerText
-    );
+    const availableBalance = getInnerTextNumber("available-balance");
 
-    if (agentNumber.length < 11) {
+    if (agentNumber.length !== 11) {
       alert("Please Enter Valid Agent Number");
       return;
     }
-    if (cashOutPin != validPin) {
+    if (cashOutPin !== validPin) {
       alert("Please Enter Your Valid Pin Number");
       return;
     }
-    if(availableBalance>cashOutAmount){
-    const totalNewAvailableBalance = availableBalance - cashOutAmount;
-    document.getElementById("available-balance").innerText =
-      totalNewAvailableBalance;
+    if (availableBalance > cashOutAmount) {
+      const totalNewAvailableBalance = availableBalance - cashOutAmount;
+      setInnerText("available-balance",totalNewAvailableBalance);
+      alert("Cash Out Successful.");
+    } else {
+      console.log("You Have Not Enough Money");
     }
-    else{
-        console.log('You Have Not Enough Money');
-    }
+    //   reset the form
+    document.getElementById("cashOutForm").reset();
   });
