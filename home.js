@@ -78,6 +78,37 @@ document
 
 
 
+// Latest Payment Show
+
+    const transactionContainer = document.getElementById("latest-payment");
+    // transactionContainer.innerText = "";
+
+    for(let i = transactionData.length - 1; i >= 0; i--)
+    {
+        const data = transactionData[i];
+        const div = document.createElement("div");
+        div.innerHTML = `
+        <div
+            class="bg-white rounded-2xl p-3 mt-3 flex justify-between items-center"
+          >
+            <div class="flex">
+              <div class="p-4 rounded-full bg-[#f4f5f7]">
+                <img src="./assets/wallet1.png" alt="" />
+              </div>
+              <div class="ml-3">
+                <h1 class="font-bold">${data.name}</h1>
+                <p class="text-[12px] mt-1">${data.date} ${data.time}</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </div>
+        `
+        transactionContainer.appendChild(div);
+    }
+
+
+
+
 // Add money works
 document
   .getElementById("add-money-btn")
@@ -103,7 +134,10 @@ document
       alert("Please Enter Your Valid Pin Number");
       return;
     }
-
+    if(amount <=0){
+        alert("Invalid Amount!");
+        return;
+    }
     // add amount
     const totalNewAvailableBalance = amount + availableBalance;
     setInnerText("available-balance", totalNewAvailableBalance);
@@ -138,6 +172,10 @@ document
     if (cashOutPin !== validPin) {
       alert("Please Enter Your Valid Pin Number");
       return;
+    }
+    if(cashOutAmount<=0){
+        alert("Invalid Amount!");
+        return;
     }
     if (availableBalance > cashOutAmount) {
       const totalNewAvailableBalance = availableBalance - cashOutAmount;
@@ -175,6 +213,10 @@ document
     if (transferPin !== validPin) {
       alert("Please Enter Your Valid Pin Number");
       return;
+    }
+    if(transferAmount <=  0){
+        alert("Invalid Amount!");
+        return;
     }
     if (availableBalance > transferAmount) {
       const totalNewAvailableBalance = availableBalance - transferAmount;
